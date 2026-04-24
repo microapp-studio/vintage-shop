@@ -1,0 +1,19 @@
+{
+  "name": "Maison Archive Vintage Shop",
+  "short_name": "Vintage Shop",
+  "description": "Mobile storefront for a small vintage shop with catalog, requests and AI item assistant.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6efe7",
+  "theme_color": "#17120f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
