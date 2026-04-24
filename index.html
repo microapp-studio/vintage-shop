@@ -3,171 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#17120f" />
-  <title>Maison Archive — Vintage Shop App</title>
-  <meta name="description" content="Mobile-first vintage shop web app demo with catalog, cart, order request and AI item assistant." />
-  <link rel="stylesheet" href="styles.css" />
+
+  <title>Maison Archive — Vintage Shop</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <meta name="theme-color" content="#17120f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Vintage Shop">
+
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="app-shell">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Vintage store demo</p>
-        <h1>Maison Archive</h1>
-      </div>
-      <button class="icon-button" id="openCartTop" aria-label="Open order bag">
-        <span class="bag-count" id="cartCountTop">0</span>
-        Bag
-      </button>
-    </header>
 
-    <main>
-      <section class="hero" id="home">
-        <div class="hero-card">
-          <p class="label">Curated vintage</p>
-          <h2>Rare clothing, jewelry and accessories in one mobile storefront.</h2>
-          <p class="hero-text">
-            A clean product catalog for small vintage shops. Customers can browse, save items,
-            send a request and contact the store directly from their phone.
-          </p>
-          <div class="hero-actions">
-            <a href="#catalog" class="primary-link">View catalog</a>
-            <a href="#ai" class="secondary-link">Try AI scan</a>
-          </div>
-        </div>
-      </section>
+<div class="app-shell">
 
-      <section class="shop-info" id="about">
-        <div class="info-card">
-          <span>Open today</span>
-          <strong>12:00 — 20:00</strong>
-        </div>
-        <div class="info-card">
-          <span>Location</span>
-          <strong>London, Shoreditch</strong>
-        </div>
-        <div class="info-card">
-          <span>Style</span>
-          <strong>90s, jewelry, archive pieces</strong>
-        </div>
-      </section>
-
-      <section class="section-head" id="catalog">
-        <div>
-          <p class="eyebrow">Catalog</p>
-          <h2>Fresh arrivals</h2>
-        </div>
-        <p class="muted">Tap any item to add it to your request bag.</p>
-      </section>
-
-      <nav class="filters" aria-label="Product filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="clothing">Clothing</button>
-        <button class="filter-btn" data-filter="jewelry">Jewelry</button>
-        <button class="filter-btn" data-filter="accessories">Accessories</button>
-      </nav>
-
-      <section class="product-grid" id="productGrid"></section>
-
-      <section class="order-panel" id="order">
-        <div class="section-head compact">
-          <div>
-            <p class="eyebrow">Request</p>
-            <h2>Your bag</h2>
-          </div>
-          <button class="text-button" id="clearCartBtn">Clear</button>
-        </div>
-
-        <div id="cartEmpty" class="empty-state">
-          Your bag is empty. Add a few items from the catalog.
-        </div>
-
-        <div id="cartItems" class="cart-items"></div>
-
-        <form class="order-form" id="orderForm">
-          <label>
-            Your name
-            <input type="text" name="name" placeholder="Anna Smith" required />
-          </label>
-
-          <label>
-            Email
-            <input type="email" name="email" placeholder="anna@email.com" required />
-          </label>
-
-          <label>
-            Message
-            <textarea name="message" rows="4" placeholder="Hi, I want to ask about these items..."></textarea>
-          </label>
-
-          <input type="hidden" name="selected_items" id="selectedItemsInput" />
-
-          <button type="submit" class="primary-button">Send request</button>
-          <a class="whatsapp-button" id="whatsappLink" href="#" target="_blank" rel="noopener">
-            Contact via WhatsApp
-          </a>
-
-          <p class="form-note">
-            Demo mode: the form can be connected to Formspree, Netlify Forms, Telegram bot or any backend.
-          </p>
-        </form>
-      </section>
-
-      <section class="ai-panel" id="ai">
-        <div class="section-head compact">
-          <div>
-            <p class="eyebrow">AI assistant</p>
-            <h2>Scan a vintage item</h2>
-          </div>
-        </div>
-
-        <p class="muted">
-          Upload a photo or open the camera. The assistant drafts a short product description and a cautious value note.
-          This is not authentication or professional appraisal.
-        </p>
-
-        <div class="scanner-box">
-          <input id="photoInput" type="file" accept="image/*" capture="environment" />
-          <label for="photoInput" class="upload-label">
-            <span>Open camera / upload photo</span>
-            <small>Jewelry, clothing, bags, accessories</small>
-          </label>
-          <img id="previewImage" class="preview-image" alt="Uploaded item preview" />
-        </div>
-
-        <label class="notes-label">
-          Optional notes
-          <textarea id="scanNotes" rows="3" placeholder="Example: gold tone brooch, heavy, no visible stamp, looks 1980s"></textarea>
-        </label>
-
-        <button class="primary-button" id="analyzeBtn">Generate item note</button>
-
-        <div class="ai-result" id="aiResult">
-          <strong>AI result will appear here.</strong>
-          <p>Upload a photo and add a few notes to generate a draft listing.</p>
-        </div>
-      </section>
-
-      <section class="contact-panel" id="contact">
-        <p class="eyebrow">Contact</p>
-        <h2>Visit or message the shop</h2>
-        <p>Maison Archive, 14 Redchurch Street, Shoreditch, London.</p>
-        <div class="contact-actions">
-          <a href="mailto:hello@maisonarchive.demo">Email</a>
-          <a href="https://maps.google.com/?q=Redchurch+Street+London" target="_blank" rel="noopener">Map</a>
-          <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </section>
-    </main>
-
-    <nav class="bottom-nav" aria-label="Bottom navigation">
-      <a href="#home">Home</a>
-      <a href="#catalog">Catalog</a>
-      <a href="#order">Bag <span id="cartCountBottom">0</span></a>
-      <a href="#ai">AI scan</a>
-    </nav>
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Vintage store</p>
+    <h1>Maison Archive</h1>
   </div>
 
-  <script src="app.js"></script>
+  <button class="icon-button" onclick="scrollToCart()">
+    <span id="cartCountTop">0</span>
+    Bag
+  </button>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-card">
+    <p class="label">Curated vintage</p>
+    <h2>Rare clothing, jewelry and archive pieces</h2>
+    <p class="hero-text">
+      Mobile storefront for small vintage shops. Browse, add items and send request instantly.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#catalog">Catalog</a>
+      <a href="#ai">AI Scan</a>
+    </div>
+  </div>
+</section>
+
+<section class="shop-info">
+  <div class="info-card">
+    <span>Open</span>
+    <strong>12:00 — 20:00</strong>
+  </div>
+
+  <div class="info-card">
+    <span>Location</span>
+    <strong>London</strong>
+  </div>
+
+  <div class="info-card">
+    <span>Style</span>
+    <strong>Vintage / Archive</strong>
+  </div>
+</section>
+
+<section id="catalog">
+  <h2>Catalog</h2>
+
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<section id="order">
+  <h2>Your Bag</h2>
+
+  <div id="cartEmpty">Cart is empty</div>
+  <div id="cartItems"></div>
+
+  <form id="orderForm">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <textarea name="message" placeholder="Message"></textarea>
+
+    <input type="hidden" id="selectedItemsInput">
+
+    <button type="submit">Send Request</button>
+  </form>
+
+  <a id="whatsappLink" target="_blank">WhatsApp</a>
+</section>
+
+<section id="ai">
+  <h2>Scan Item</h2>
+
+  <input type="file" id="photoInput" accept="image/*" capture="environment">
+
+  <textarea id="scanNotes" placeholder="Notes..."></textarea>
+
+  <button id="analyzeBtn">Analyze</button>
+
+  <div id="aiResult">Result will appear here</div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+
+  <p>Maison Archive</p>
+
+  <a href="mailto:test@email.com">Email</a>
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+  <a href="#">Home</a>
+  <a href="#catalog">Catalog</a>
+  <a href="#order">Bag <span id="cartCountBottom">0</span></a>
+  <a href="#ai">AI</a>
+</nav>
+
+</div>
+
+<script src="app.js"></script>
+
+<!-- SERVICE WORKER -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
+</script>
+
 </body>
 </html>
