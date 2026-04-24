@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Vintique — vintage shop</title>
+  <meta name="description" content="Демо веб-приложение для маленького винтажного магазина: каталог, цены, заявки, контакты и AI-помощник по описанию вещей." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#hero" aria-label="Maison Vintique home">
+      <span class="brand-mark">MV</span>
+      <span>
+        <strong>Maison Vintique</strong>
+        <small>curated vintage</small>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="#catalog">Каталог</a>
+      <a href="#ai">AI-камера</a>
+      <a href="#order">Заявка</a>
+      <a href="#visit">Контакты</a>
+    </nav>
+    <button class="cart-button" type="button" data-open-cart>
+      Корзина <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">small shop web app</p>
+        <h1>Витрина для винтажного магазина с каталогом, заявками и AI-описанием вещей</h1>
+        <p class="lead">Демо-приложение для маленьких магазинов: одежда, украшения, аксессуары, единичные позиции и быстрый контакт с продавцом.</p>
+        <div class="hero-actions">
+          <a class="primary" href="#catalog">Смотреть каталог</a>
+          <a class="secondary" href="#ai">Проверить вещь через камеру</a>
+        </div>
+        <div class="stats" aria-label="Преимущества">
+          <div><strong>15 сек.</strong><span>добавить товар</span></div>
+          <div><strong>24/7</strong><span>витрина онлайн</span></div>
+          <div><strong>AI</strong><span>черновик описания</span></div>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Пример карточки товара">
+        <div class="hero-image"></div>
+        <div class="floating-card top">Rare find<br><strong>1950s brooch</strong></div>
+        <div class="floating-card bottom">Заявка в 1 клик<br><strong>WhatsApp / Email</strong></div>
+      </div>
+    </section>
+
+    <section class="section intro-grid">
+      <article>
+        <span class="number">01</span>
+        <h2>Для кого</h2>
+        <p>Винтажные магазины, ресейл-проекты, небольшие шоурумы, продавцы украшений, одежды и редких предметов.</p>
+      </article>
+      <article>
+        <span class="number">02</span>
+        <h2>Что получает клиент</h2>
+        <p>Собственную ссылку с каталогом, ценами, описаниями, адресом, кнопками связи и формой заявки.</p>
+      </article>
+      <article>
+        <span class="number">03</span>
+        <h2>Зачем AI</h2>
+        <p>AI помогает быстро составить описание товара по фото и заметкам продавца. Финальную оценку всегда делает человек.</p>
+      </article>
+    </section>
+
+    <section class="section catalog-section" id="catalog">
+      <div class="section-head">
+        <p class="eyebrow">catalogue</p>
+        <h2>Каталог магазина</h2>
+        <p>Пример витрины: карточки, цены, категории, статус товара и быстрая заявка.</p>
+      </div>
+      <div class="filters" role="tablist" aria-label="Фильтр товаров">
+        <button class="filter active" data-filter="all">Все</button>
+        <button class="filter" data-filter="clothes">Одежда</button>
+        <button class="filter" data-filter="jewelry">Украшения</button>
+        <button class="filter" data-filter="accessories">Аксессуары</button>
+      </div>
+      <div class="catalog" id="catalogGrid"></div>
+    </section>
+
+    <section class="section ai-section" id="ai">
+      <div class="ai-panel">
+        <div class="section-head left">
+          <p class="eyebrow">AI camera assistant</p>
+          <h2>Камера для описания вещи</h2>
+          <p>Покупатель или продавец загружает фото, добавляет пару заметок, а помощник готовит аккуратный черновик: что это может быть, на что обратить внимание, как описать товар в витрине.</p>
+        </div>
+        <div class="ai-box">
+          <label class="upload-area" for="photoInput">
+            <input id="photoInput" type="file" accept="image/*" capture="environment" />
+            <span class="upload-icon">⌁</span>
+            <strong>Открыть камеру или загрузить фото</strong>
+            <small>JPG, PNG, HEIC на телефоне</small>
+          </label>
+          <img id="previewImage" class="preview hidden" alt="Предпросмотр вещи" />
+          <textarea id="aiNotes" placeholder="Например: брошь тяжелая, застежка старая, есть маркировка, камни похожи на стекло"></textarea>
+          <button class="primary full" type="button" id="analyzeBtn">Сделать AI-черновик</button>
+          <div class="ai-result" id="aiResult">
+            <strong>AI-черновик появится здесь.</strong>
+            <p>В демо-версии анализ имитируется. Для реального проекта подключается vision API через безопасный серверный слой.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section order-section" id="order">
+      <div class="section-head">
+        <p class="eyebrow">order request</p>
+        <h2>Заявка покупателя</h2>
+        <p>Форма уже готова под реальную отправку через Formspree. Нужно заменить адрес в `action` на свой endpoint.</p>
+      </div>
+      <form class="order-form" id="orderForm" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="form-grid">
+          <label>Имя
+            <input type="text" name="name" placeholder="Anna" required>
+          </label>
+          <label>Email
+            <input type="email" name="email" placeholder="anna@email.com" required>
+          </label>
+          <label>Телефон / WhatsApp
+            <input type="text" name="phone" placeholder="+49 000 000 00 00">
+          </label>
+          <label>Город
+            <input type="text" name="city" placeholder="Berlin">
+          </label>
+        </div>
+        <label>Выбранные товары
+          <textarea id="selectedItems" name="selected_items" readonly placeholder="Добавьте товары из каталога"></textarea>
+        </label>
+        <label>Комментарий
+          <textarea name="message" placeholder="Хочу уточнить состояние, размер, доставку"></textarea>
+        </label>
+        <input type="hidden" name="source" value="Maison Vintique demo app">
+        <div class="form-actions">
+          <button class="primary" type="submit">Отправить заявку</button>
+          <a class="secondary" id="whatsappLink" href="#" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        </div>
+        <p class="form-note">Для демо форма показывает механику. Подключение email занимает 5 минут через Formspree, Getform или Netlify Forms.</p>
+      </form>
+    </section>
+
+    <section class="section visit" id="visit">
+      <div>
+        <p class="eyebrow">visit us</p>
+        <h2>Адрес и контакты</h2>
+        <p>Maison Vintique, 18 Rue des Archives, Paris. Открыто: вт–сб, 12:00–20:00. Самовывоз, доставка по городу, международная отправка по запросу.</p>
+      </div>
+      <div class="contact-card">
+        <a href="mailto:hello@maisonvintique.example">hello@maisonvintique.example</a>
+        <a href="https://wa.me/491234567890" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <strong>Корзина заявки</strong>
+      <button type="button" data-close-cart aria-label="Закрыть">×</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="drawer-footer">
+      <div><span>Итого</span><strong id="cartTotal">€0</strong></div>
+      <a class="primary full" href="#order" data-close-cart>Оформить заявку</a>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay" data-close-cart></div>
+
+  <footer class="footer">
+    <p>Demo app by independent creator. Built for GitHub Pages.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
