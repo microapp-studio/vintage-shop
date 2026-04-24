@@ -1,98 +1,102 @@
-# Maison Vintique — demo web app for small vintage shops
+# Maison Archive — Vintage Shop Mobile Web App
 
-Это демо веб-приложение для маленького магазина: винтажная одежда, украшения, аксессуары, ресейл.
+A mobile-first web app demo for small vintage shops.
 
-## Что внутри
+## Features
 
-- Главная страница с премиальной визуальной подачей
-- Каталог товаров
-- Фильтр по категориям
-- Цены и статусы товаров
-- Корзина заявки
-- Форма заявки
-- WhatsApp-ссылка с выбранными товарами
-- Контакты и адрес
-- Блок AI camera assistant: загрузка фото или камера телефона
-- Демонстрационная генерация описания товара
+- English interface
+- Mobile-first storefront
+- Product catalog
+- Category filters
+- Product cards with price, tags and description
+- Request bag / cart
+- Customer request form
+- WhatsApp contact link with selected items
+- Camera / image upload field
+- Demo AI item note generator
+- GitHub Pages ready
 
-## Как залить на GitHub Pages
+## Important
 
-1. Создать репозиторий на GitHub.
-2. Загрузить файлы `index.html`, `styles.css`, `app.js`, `README.md`.
-3. Открыть Settings → Pages.
-4. Source: Deploy from branch.
-5. Branch: main / root.
-6. Сохранить.
+This is a static front-end demo.
 
-Через минуту сайт появится по адресу вида:
-`https://username.github.io/repository-name/`
+It does not include:
 
-## Как подключить email-заявки через Formspree
+- real online payments
+- real AI vision analysis
+- real email sending
+- admin panel
+- backend database
 
-1. Зарегистрироваться на https://formspree.io/
-2. Создать новую форму.
-3. Скопировать endpoint вида:
-`https://formspree.io/f/xxxxxxx`
-4. В файле `index.html` найти строку:
-`action="https://formspree.io/f/your-form-id"`
-5. Заменить `your-form-id` на свой ID.
-6. После этого заявки будут приходить на email.
+For a real client project, you can connect:
 
-## Почему Telegram нельзя подключать напрямую в app.js
+- Stripe or PayPal for payments
+- Formspree / Netlify Forms / backend API for orders
+- OpenAI Vision API or another image model for real photo analysis
+- Firebase / Supabase for products and admin panel
+- Telegram bot via a serverless function
 
-Токен Telegram-бота нельзя хранить в открытом JavaScript-файле. GitHub Pages — статический хостинг, любой человек сможет открыть код и украсть токен.
+## How to publish on GitHub Pages
 
-Правильная схема:
+1. Create a new GitHub repository.
+2. Upload these files:
+   - index.html
+   - styles.css
+   - app.js
+   - README.md
+3. Go to repository Settings.
+4. Open Pages.
+5. Choose the main branch and root folder.
+6. Save.
 
-- GitHub Pages: фронтенд
-- Vercel / Netlify Functions / Cloudflare Workers: безопасная serverless-функция
-- Telegram Bot API: отправка заявки в чат продавца
+Your app will be available at:
 
-## Пример serverless-логики для Telegram
-
-Фронтенд отправляет POST-запрос на безопасный endpoint:
-
-```js
-fetch('https://your-serverless-endpoint.example/send-order', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name, phone, selectedItems, message })
-});
+```text
+https://your-username.github.io/repository-name/
 ```
 
-Serverless-функция хранит `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID` в переменных окружения, а не в публичном коде.
+## How to connect Formspree
 
-## Реальный AI-анализ фото
+1. Create a form at https://formspree.io
+2. Replace the form tag in index.html:
 
-В текущей версии AI-блок демонстрационный. Он показывает механику: фото + заметки → черновик описания.
+```html
+<form class="order-form" id="orderForm">
+```
 
-Для настоящего анализа по изображению нужен серверный слой и vision API. Например:
+with:
 
-- OpenAI Vision
-- Google Vision
-- Replicate / open-source vision models
+```html
+<form class="order-form" id="orderForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+```
 
-Важно: для ювелирки, брендов и винтажа AI должен давать только предварительное описание. Нельзя обещать точное определение оригинальности, бренда или рыночной цены без эксперта.
+3. In app.js, remove or rewrite the current demo submit handler if you want the browser to submit directly to Formspree.
 
-## Как продавать этот шаблон на Upwork
+## How to connect Telegram safely
 
-Позиционирование:
+Do not put a Telegram bot token inside app.js.
 
-> I build simple web apps for small shops: product catalogue, prices, contact forms, WhatsApp requests, and AI-assisted product descriptions.
+Use one of these:
 
-Базовая услуга:
+- Vercel Serverless Function
+- Netlify Function
+- Cloudflare Worker
+- your own backend
 
-- Small shop web app
-- Product catalogue
-- Contact and request form
-- WhatsApp button
-- Mobile-first design
-- GitHub Pages deployment
+The frontend sends order data to your serverless endpoint.
+The serverless endpoint sends the message to Telegram using the hidden bot token.
 
-Дополнительные услуги:
+## Demo positioning for freelance platforms
 
-- Email order form setup
-- Telegram order notifications
-- AI product description assistant
-- Admin panel
-- Online payments
+You can describe this project as:
+
+> Mobile-first storefront for small vintage shops with product catalog, request bag, customer inquiry form, WhatsApp contact and AI-assisted product description draft.
+
+Good for:
+
+- vintage shops
+- thrift stores
+- handmade jewelry sellers
+- small boutiques
+- Instagram sellers
+- pop-up stores

@@ -1,182 +1,172 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maison Vintique — vintage shop</title>
-  <meta name="description" content="Демо веб-приложение для маленького винтажного магазина: каталог, цены, заявки, контакты и AI-помощник по описанию вещей." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#17120f" />
+  <title>Maison Archive — Vintage Shop App</title>
+  <meta name="description" content="Mobile-first vintage shop web app demo with catalog, cart, order request and AI item assistant." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#hero" aria-label="Maison Vintique home">
-      <span class="brand-mark">MV</span>
-      <span>
-        <strong>Maison Vintique</strong>
-        <small>curated vintage</small>
-      </span>
-    </a>
-    <nav class="nav" aria-label="Основное меню">
-      <a href="#catalog">Каталог</a>
-      <a href="#ai">AI-камера</a>
-      <a href="#order">Заявка</a>
-      <a href="#visit">Контакты</a>
-    </nav>
-    <button class="cart-button" type="button" data-open-cart>
-      Корзина <span id="cartCount">0</span>
-    </button>
-  </header>
-
-  <main>
-    <section class="hero" id="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">small shop web app</p>
-        <h1>Витрина для винтажного магазина с каталогом, заявками и AI-описанием вещей</h1>
-        <p class="lead">Демо-приложение для маленьких магазинов: одежда, украшения, аксессуары, единичные позиции и быстрый контакт с продавцом.</p>
-        <div class="hero-actions">
-          <a class="primary" href="#catalog">Смотреть каталог</a>
-          <a class="secondary" href="#ai">Проверить вещь через камеру</a>
-        </div>
-        <div class="stats" aria-label="Преимущества">
-          <div><strong>15 сек.</strong><span>добавить товар</span></div>
-          <div><strong>24/7</strong><span>витрина онлайн</span></div>
-          <div><strong>AI</strong><span>черновик описания</span></div>
-        </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Vintage store demo</p>
+        <h1>Maison Archive</h1>
       </div>
-      <div class="hero-card" aria-label="Пример карточки товара">
-        <div class="hero-image"></div>
-        <div class="floating-card top">Rare find<br><strong>1950s brooch</strong></div>
-        <div class="floating-card bottom">Заявка в 1 клик<br><strong>WhatsApp / Email</strong></div>
-      </div>
-    </section>
+      <button class="icon-button" id="openCartTop" aria-label="Open order bag">
+        <span class="bag-count" id="cartCountTop">0</span>
+        Bag
+      </button>
+    </header>
 
-    <section class="section intro-grid">
-      <article>
-        <span class="number">01</span>
-        <h2>Для кого</h2>
-        <p>Винтажные магазины, ресейл-проекты, небольшие шоурумы, продавцы украшений, одежды и редких предметов.</p>
-      </article>
-      <article>
-        <span class="number">02</span>
-        <h2>Что получает клиент</h2>
-        <p>Собственную ссылку с каталогом, ценами, описаниями, адресом, кнопками связи и формой заявки.</p>
-      </article>
-      <article>
-        <span class="number">03</span>
-        <h2>Зачем AI</h2>
-        <p>AI помогает быстро составить описание товара по фото и заметкам продавца. Финальную оценку всегда делает человек.</p>
-      </article>
-    </section>
-
-    <section class="section catalog-section" id="catalog">
-      <div class="section-head">
-        <p class="eyebrow">catalogue</p>
-        <h2>Каталог магазина</h2>
-        <p>Пример витрины: карточки, цены, категории, статус товара и быстрая заявка.</p>
-      </div>
-      <div class="filters" role="tablist" aria-label="Фильтр товаров">
-        <button class="filter active" data-filter="all">Все</button>
-        <button class="filter" data-filter="clothes">Одежда</button>
-        <button class="filter" data-filter="jewelry">Украшения</button>
-        <button class="filter" data-filter="accessories">Аксессуары</button>
-      </div>
-      <div class="catalog" id="catalogGrid"></div>
-    </section>
-
-    <section class="section ai-section" id="ai">
-      <div class="ai-panel">
-        <div class="section-head left">
-          <p class="eyebrow">AI camera assistant</p>
-          <h2>Камера для описания вещи</h2>
-          <p>Покупатель или продавец загружает фото, добавляет пару заметок, а помощник готовит аккуратный черновик: что это может быть, на что обратить внимание, как описать товар в витрине.</p>
-        </div>
-        <div class="ai-box">
-          <label class="upload-area" for="photoInput">
-            <input id="photoInput" type="file" accept="image/*" capture="environment" />
-            <span class="upload-icon">⌁</span>
-            <strong>Открыть камеру или загрузить фото</strong>
-            <small>JPG, PNG, HEIC на телефоне</small>
-          </label>
-          <img id="previewImage" class="preview hidden" alt="Предпросмотр вещи" />
-          <textarea id="aiNotes" placeholder="Например: брошь тяжелая, застежка старая, есть маркировка, камни похожи на стекло"></textarea>
-          <button class="primary full" type="button" id="analyzeBtn">Сделать AI-черновик</button>
-          <div class="ai-result" id="aiResult">
-            <strong>AI-черновик появится здесь.</strong>
-            <p>В демо-версии анализ имитируется. Для реального проекта подключается vision API через безопасный серверный слой.</p>
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-card">
+          <p class="label">Curated vintage</p>
+          <h2>Rare clothing, jewelry and accessories in one mobile storefront.</h2>
+          <p class="hero-text">
+            A clean product catalog for small vintage shops. Customers can browse, save items,
+            send a request and contact the store directly from their phone.
+          </p>
+          <div class="hero-actions">
+            <a href="#catalog" class="primary-link">View catalog</a>
+            <a href="#ai" class="secondary-link">Try AI scan</a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section order-section" id="order">
-      <div class="section-head">
-        <p class="eyebrow">order request</p>
-        <h2>Заявка покупателя</h2>
-        <p>Форма уже готова под реальную отправку через Formspree. Нужно заменить адрес в `action` на свой endpoint.</p>
-      </div>
-      <form class="order-form" id="orderForm" action="https://formspree.io/f/your-form-id" method="POST">
-        <div class="form-grid">
-          <label>Имя
-            <input type="text" name="name" placeholder="Anna" required>
-          </label>
-          <label>Email
-            <input type="email" name="email" placeholder="anna@email.com" required>
-          </label>
-          <label>Телефон / WhatsApp
-            <input type="text" name="phone" placeholder="+49 000 000 00 00">
-          </label>
-          <label>Город
-            <input type="text" name="city" placeholder="Berlin">
-          </label>
+      <section class="shop-info" id="about">
+        <div class="info-card">
+          <span>Open today</span>
+          <strong>12:00 — 20:00</strong>
         </div>
-        <label>Выбранные товары
-          <textarea id="selectedItems" name="selected_items" readonly placeholder="Добавьте товары из каталога"></textarea>
-        </label>
-        <label>Комментарий
-          <textarea name="message" placeholder="Хочу уточнить состояние, размер, доставку"></textarea>
-        </label>
-        <input type="hidden" name="source" value="Maison Vintique demo app">
-        <div class="form-actions">
-          <button class="primary" type="submit">Отправить заявку</button>
-          <a class="secondary" id="whatsappLink" href="#" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <div class="info-card">
+          <span>Location</span>
+          <strong>London, Shoreditch</strong>
         </div>
-        <p class="form-note">Для демо форма показывает механику. Подключение email занимает 5 минут через Formspree, Getform или Netlify Forms.</p>
-      </form>
-    </section>
+        <div class="info-card">
+          <span>Style</span>
+          <strong>90s, jewelry, archive pieces</strong>
+        </div>
+      </section>
 
-    <section class="section visit" id="visit">
-      <div>
-        <p class="eyebrow">visit us</p>
-        <h2>Адрес и контакты</h2>
-        <p>Maison Vintique, 18 Rue des Archives, Paris. Открыто: вт–сб, 12:00–20:00. Самовывоз, доставка по городу, международная отправка по запросу.</p>
-      </div>
-      <div class="contact-card">
-        <a href="mailto:hello@maisonvintique.example">hello@maisonvintique.example</a>
-        <a href="https://wa.me/491234567890" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-      </div>
-    </section>
-  </main>
+      <section class="section-head" id="catalog">
+        <div>
+          <p class="eyebrow">Catalog</p>
+          <h2>Fresh arrivals</h2>
+        </div>
+        <p class="muted">Tap any item to add it to your request bag.</p>
+      </section>
 
-  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
-    <div class="drawer-head">
-      <strong>Корзина заявки</strong>
-      <button type="button" data-close-cart aria-label="Закрыть">×</button>
-    </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="drawer-footer">
-      <div><span>Итого</span><strong id="cartTotal">€0</strong></div>
-      <a class="primary full" href="#order" data-close-cart>Оформить заявку</a>
-    </div>
-  </aside>
-  <div class="overlay" id="overlay" data-close-cart></div>
+      <nav class="filters" aria-label="Product filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="clothing">Clothing</button>
+        <button class="filter-btn" data-filter="jewelry">Jewelry</button>
+        <button class="filter-btn" data-filter="accessories">Accessories</button>
+      </nav>
 
-  <footer class="footer">
-    <p>Demo app by independent creator. Built for GitHub Pages.</p>
-  </footer>
+      <section class="product-grid" id="productGrid"></section>
+
+      <section class="order-panel" id="order">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">Request</p>
+            <h2>Your bag</h2>
+          </div>
+          <button class="text-button" id="clearCartBtn">Clear</button>
+        </div>
+
+        <div id="cartEmpty" class="empty-state">
+          Your bag is empty. Add a few items from the catalog.
+        </div>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <form class="order-form" id="orderForm">
+          <label>
+            Your name
+            <input type="text" name="name" placeholder="Anna Smith" required />
+          </label>
+
+          <label>
+            Email
+            <input type="email" name="email" placeholder="anna@email.com" required />
+          </label>
+
+          <label>
+            Message
+            <textarea name="message" rows="4" placeholder="Hi, I want to ask about these items..."></textarea>
+          </label>
+
+          <input type="hidden" name="selected_items" id="selectedItemsInput" />
+
+          <button type="submit" class="primary-button">Send request</button>
+          <a class="whatsapp-button" id="whatsappLink" href="#" target="_blank" rel="noopener">
+            Contact via WhatsApp
+          </a>
+
+          <p class="form-note">
+            Demo mode: the form can be connected to Formspree, Netlify Forms, Telegram bot or any backend.
+          </p>
+        </form>
+      </section>
+
+      <section class="ai-panel" id="ai">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">AI assistant</p>
+            <h2>Scan a vintage item</h2>
+          </div>
+        </div>
+
+        <p class="muted">
+          Upload a photo or open the camera. The assistant drafts a short product description and a cautious value note.
+          This is not authentication or professional appraisal.
+        </p>
+
+        <div class="scanner-box">
+          <input id="photoInput" type="file" accept="image/*" capture="environment" />
+          <label for="photoInput" class="upload-label">
+            <span>Open camera / upload photo</span>
+            <small>Jewelry, clothing, bags, accessories</small>
+          </label>
+          <img id="previewImage" class="preview-image" alt="Uploaded item preview" />
+        </div>
+
+        <label class="notes-label">
+          Optional notes
+          <textarea id="scanNotes" rows="3" placeholder="Example: gold tone brooch, heavy, no visible stamp, looks 1980s"></textarea>
+        </label>
+
+        <button class="primary-button" id="analyzeBtn">Generate item note</button>
+
+        <div class="ai-result" id="aiResult">
+          <strong>AI result will appear here.</strong>
+          <p>Upload a photo and add a few notes to generate a draft listing.</p>
+        </div>
+      </section>
+
+      <section class="contact-panel" id="contact">
+        <p class="eyebrow">Contact</p>
+        <h2>Visit or message the shop</h2>
+        <p>Maison Archive, 14 Redchurch Street, Shoreditch, London.</p>
+        <div class="contact-actions">
+          <a href="mailto:hello@maisonarchive.demo">Email</a>
+          <a href="https://maps.google.com/?q=Redchurch+Street+London" target="_blank" rel="noopener">Map</a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <a href="#home">Home</a>
+      <a href="#catalog">Catalog</a>
+      <a href="#order">Bag <span id="cartCountBottom">0</span></a>
+      <a href="#ai">AI scan</a>
+    </nav>
+  </div>
 
   <script src="app.js"></script>
 </body>
